@@ -8,54 +8,37 @@
 // This way, we can retrieve the minimum value in O(1) time by looking at the top of the stack.
 import java.util.Stack;
 class MinStack {
- 
-    class Pair {
-        long val;
-        long min;
-
-        Pair(long val, long min) {
-            this.val = val;
-            this.min = min;
-        }
-    }
-
-    Stack<Pair> st;
+    Stack<Integer> st;
+    int min;
 
     public MinStack() {
-        st = new Stack<>();
+        this.st = new Stack<>();
+        this.min = Integer.MAX_VALUE;
     }
+
     public void push(int val) {
-        if(st.isEmpty())
-        {
-            st.push(new Pair(val,val));
+        if(min >= val){
+            st.push(min);
+            min = val;
         }
-        else
-        {
-            long currMin=Math.min(val,st.peek().min);
-            st.push(new Pair(val,currMin));
-        }
+        st.push(val);
     }
-    
+
     public void pop() {
-        if (!st.isEmpty()) {
-            st.pop();
+        if(min == st.pop()){
+            min = st.pop();
         }
     }
-    
+
     public int top() {
-        if (!st.isEmpty()) {
-            return (int) st.peek().val;
-        }
-        throw new RuntimeException("Stack is empty.");
+        return st.peek();
     }
-    
+
     public int getMin() {
-         if (!st.isEmpty()) {
-            return (int) st.peek().min;
-        }
-        throw new RuntimeException("Stack is empty.");
+        return min;
     }
 }
+
 
 /**
  * Your MinStack object will be instantiated and called as such:
