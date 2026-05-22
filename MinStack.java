@@ -15,29 +15,30 @@ class MinStack {
         this.st = new Stack<>();
         this.min = Integer.MAX_VALUE;
     }
-
+    
     public void push(int val) {
-        if(min >= val){
-            st.push(min);
-            min = val;
-        }
-        st.push(val);
+       if(min >= val){
+        st.push(min);
+        min = val;
+       }
+       st.push(val);
     }
-
+    
     public void pop() {
-        if(min == st.pop()){
-            min = st.pop();
-        }
+       if(min == st.pop()){
+        min = st.pop();
+       }
     }
-
+    
     public int top() {
         return st.peek();
     }
-
+    
     public int getMin() {
         return min;
     }
 }
+
 
 
 /**
